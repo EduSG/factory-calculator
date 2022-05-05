@@ -19,14 +19,14 @@ function criaCalduadora() {
         },
 
         cliqueEnter() {
-            this.document.addEventListener('keypress', e => {
+            this.display.addEventListener('keyup', e => {
                 if(e.keyCode === 13) this.fazConta();
             });
         },
 
         numeroNoDisplay(valor) {
             this.display.value += valor;
-            tihs.display.focus();
+            this.display.focus();
             //ta bugado :/
         },
 
@@ -39,11 +39,19 @@ function criaCalduadora() {
         },
 
         fazConta(){
-            try{
-                this.display.value = eval(this.display.value);
-            }catch(e){
-                alert('tente uma operacao valida')
-            }
+            try {
+                const conta = eval(this.display.value);
+          
+                if(!conta) {
+                  alert('Conta inválida');
+                  return;
+                }
+          
+                this.display.value = conta;
+              } catch(e) {
+                alert('Conta inválida');
+                return;
+              }
         }
         
     };
